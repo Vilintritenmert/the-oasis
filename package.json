@@ -1,0 +1,7 @@
+{
+  "name": "the-oasis",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}

@@ -1,0 +1,30 @@
+version: "3.4"
+services:
+  oasis_web:
+    image: "node:18.20"
+    user: "node"
+    working_dir: /home/node/app
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 8001:${APP_PORT}
+    links:
+      - oasis_db
+    command: npm run start:dev
+  oasis_db:
+    image: "postgres"
+    restart: always
+    shm_size: 128mb
+    expose:
+      - 5432
+    env_file:
+      - .env
+    volumes:
+      - ./docker/create-db.sql:/docker-entrypoint-initdb.d/create_database.sql
+  oasis_adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
