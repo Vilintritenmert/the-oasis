@@ -25,6 +25,32 @@ function CabinTable() {
     filteredCabins = cabins.filter(({ discount }) => discount);
   }
 
+  const sortParams = searchParams.get('sort-field') || 'name-asc'
+
+  if (sortParams === 'name-desc') {
+    filteredCabins = filteredCabins.sort(({name: name1}, {name: name2}) => name1 > name2 ? -1 : 1)
+  }
+
+  if (sortParams === 'name-asc') {
+    filteredCabins = filteredCabins.sort(({name: name1}, {name: name2}) => name1 > name2 ? 1 : -1)
+  }
+  
+  if (sortParams === 'regular-price-asc') {
+    filteredCabins = filteredCabins.sort(({regularPrice: price1}, {regularPrice: price2}) => price1 > price2 ? 1 : -1)
+  }
+    
+  if (sortParams === 'regular-price-desc') {
+    filteredCabins = filteredCabins.sort(({regularPrice: price1}, {regularPrice: price2}) => price1 > price2 ? -1 : 1)
+  }
+   
+  if (sortParams === 'max-capacity-asc') {
+    filteredCabins = filteredCabins.sort(({maxCapacity: capacity1}, {maxCapacity: capacity2}) => capacity1 > capacity2 ? 1 : -1)
+  }
+  
+  if (sortParams === 'max-capacity-desc') {
+    filteredCabins = filteredCabins.sort(({maxCapacity: capacity1}, {maxCapacity: capacity2}) => capacity1 > capacity2 ? -1 : 1)
+  }
+
   return (
     <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
       <Table.Header>

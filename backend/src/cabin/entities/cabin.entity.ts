@@ -24,7 +24,9 @@ export class Cabin {
   @Column()
   regularPrice: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   discount: number;
 
   @Column()
