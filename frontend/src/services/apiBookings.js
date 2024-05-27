@@ -1,5 +1,9 @@
 import { fetchData, updateData, deleteData } from './api';
 
+export async function getBookings() {
+  return await fetchData('booking');
+}
+
 export async function getBooking(id) {
   return await fetchData(`booking/${id}`);
 }
@@ -12,12 +16,11 @@ export async function getBookingsAfterDate(date) {
 // Returns all STAYS that are were created after the given date
 export async function getStaysAfterDate(date) {
   return await fetchData(`booking/staysAfterDate?date=${date}`);
-
 }
 
 // Activity means that there is a check in or a check out today
 export async function getStaysTodayActivity() {
-  return await fetchData('booking/staysToday')
+  return await fetchData('booking/staysToday');
 }
 
 export async function updateBooking(id, obj) {
