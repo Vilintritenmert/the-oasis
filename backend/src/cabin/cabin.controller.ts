@@ -86,8 +86,8 @@ export class CabinController {
 
     const updatedCabin = this.cabinService.update(id, updateCabinDto);
 
-    if (image) {
-      await this.fileService.delete(oldImage);
+    if (oldImage && image) {
+      await this.fileService.delete(oldImage).catch(console.error);
     }
 
     return updatedCabin;
