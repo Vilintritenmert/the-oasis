@@ -44,13 +44,14 @@ export class CabinController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [new FileTypeValidator({ fileType: 'image' })],
+        fileIsRequired: false,
       }),
     )
-    image: Express.Multer.File,
+    image?: Express.Multer.File,
   ) {
     return this.cabinService.create({
       ...createCabinDto,
-      image: `http://localhost:8001/cabins/${image.filename}`,
+      image: image ? `http://localhost:8001/cabins/${image.filename}` : '',
     });
   }
 
@@ -97,7 +98,9 @@ export class CabinController {
     const { image } = await this.cabinService.findOne(id);
     const result = await this.cabinService.remove(id);
 
-    await this.fileService.delete(image);
+    if (image) {
+      await this.fileService.delete(image);
+    }
 
     return result;
   }

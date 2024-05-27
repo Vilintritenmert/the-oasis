@@ -19,7 +19,7 @@ function CabinTable() {
       </Table.Header>
       <Table.Body
         data={cabins}
-        render={cabin => <CabinRow cabin={cabin} key={cabin.name} />}
+        render={cabin => <CabinRow cabin={cabin} key={cabin.id} />}
       />
     </Table>
   );
